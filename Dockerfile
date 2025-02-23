@@ -11,4 +11,6 @@ RUN pip install --upgrade pip && pip install -r requirements.txt --no-cache-dir
 
 COPY . .
 
-CMD ["python", "CyberpsychBot/tweet.py"]
+EXPOSE 8000
+
+CMD ["sh", "-c", "python CyberpsychBot/tweet.py & python CyberpsychBot/server.py"]
