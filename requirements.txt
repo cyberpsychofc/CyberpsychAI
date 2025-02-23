@@ -1,0 +1,3 @@
+groq
+tweepy
+python-dotenv
