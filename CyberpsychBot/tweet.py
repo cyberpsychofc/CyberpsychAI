@@ -26,12 +26,10 @@ newapi = tweepy.Client(
 api = tweepy.API(auth)
 
 def tweet():
-    while True:
-        try:
-            sampletweet = generate_tweet_text()
-            
-            post_result = newapi.create_tweet(text=sampletweet)
-            print(post_result)
+    try:
+        sampletweet = generate_tweet_text()
         
-        except Exception as e:
-            print(f"Tweet couldn't be posted because: {e}")
+        post_result = newapi.create_tweet(text=sampletweet)
+    
+    except Exception as e:
+        print(f"Tweet couldn't be posted because: {e}")
