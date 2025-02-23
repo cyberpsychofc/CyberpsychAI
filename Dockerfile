@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python CyberpsychBot/tweet.py & python CyberpsychBot/server.py"]
+CMD ["python", "CyberpsychBot/server.py"]
