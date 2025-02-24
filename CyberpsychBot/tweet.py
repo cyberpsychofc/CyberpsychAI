@@ -39,13 +39,17 @@ def tweet():
 
 def reply():
     try:
-        username = rivals[random.randint(0,len(rivals) - 1)]
-        tweets = api.user_timeline(screen_name=username, count=3, tweet_mode="extended")
-
+        username = random.choice(rivals)
+        tweets = newapi.search_recent_tweets(
+            query=f"from:{username} -is:retweet -is:reply", 
+            max_results=10, 
+            tweet_fields=["id", "text"])
+        
         if tweets:
-            latest_tweet = tweets[random.randint(0,len(tweets) - 1)]
-            tweet_id = latest_tweet.id
-            tweet_text = latest_tweet.full_text
+            latest_tweet = random.choice(tweets.data)  
+            tweet_id = latest_tweet.id  
+            tweet_text = latest_tweet.text  
+
             api.update_status(
                 status=generate_reply_text(username, tweet_text), 
                 in_reply_to_status_id=tweet_id, 

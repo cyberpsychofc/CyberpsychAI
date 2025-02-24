@@ -12,7 +12,7 @@ llm = Groq(api_key=os.environ.get("GROQ_API_KEY"))  # LLM initialization
 psychs = ['Artifical Intelligence', 'Philosophy', 'Financial Advices']
 
 prompt = f"""
-You are an expert on the topic of {psychs[random.randint(0,len(psychs) - 1)]}, tell me a funny or uncommon fact about
+You are an expert on the topic of {random.choice(psychs)}, tell me a funny or uncommon fact about
 it in less than 250 characters. Your response should be precise, avoid using any unnecessary words.
 """
 
