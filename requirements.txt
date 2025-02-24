@@ -2,3 +2,4 @@ groq
 tweepy
 python-dotenv
 flask
+schedule

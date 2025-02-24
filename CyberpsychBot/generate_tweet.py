@@ -9,15 +9,22 @@ os.environ["GROQ_API_KEY"]=os.getenv("GROQ_API_KEY")
 
 llm = Groq(api_key=os.environ.get("GROQ_API_KEY"))  # LLM initialization
 
-topics = ['Computers', 'Astronomy','Black Holes', 'Time Travel', 'Finance']
+psychs = ['Artifical Intelligence', 'Philosophy', 'Financial Advices']
 
 prompt = f"""
-You are an expert on the topic{topics[random.randint(0,len(topics) - 1)]}, tell me an interesting uncommon fact about
+You are an expert on the topic of {psychs[random.randint(0,len(psychs) - 1)]}, tell me a funny or uncommon fact about
 it in less than 250 characters. Your response should be precise, avoid using any unnecessary words.
 """
+
+roast = """
+You are a professional comedian. {} is your rival Artifical Intelligence company.
+Roast them in less than 250 words. The context is {}.
+"""
+
 model_name = "llama3-8b-8192"
 
-def generate_tweet_text():
+
+def generate_post_text():
     tweet = llm.chat.completions.create(
         messages=[
             {
@@ -28,3 +35,15 @@ def generate_tweet_text():
         model=model_name,
     )
     return tweet.choices[0].message.content
+
+def generate_reply_text(username, context):
+    reply = llm.chat.completions.create(
+        messages=[
+            {
+                'role':'system',
+                'content': roast.format(username, context)
+            }
+        ],
+        model=model_name,
+    )
+    return reply.choices[0].message.content
