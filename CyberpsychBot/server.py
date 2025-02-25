@@ -7,9 +7,8 @@ from tweet import tweet, reply
 bot = Flask(__name__)
 
 # Free-tier sends atmost of 17 requests a day, so plan
-# Instance time is UTC
-post_times = ["05:00"]
-roast_times = ["05:02"]
+post_times = ["06:00","08:00","10:00","12:00","14:00","16:00"]  # Instance timezone is UTC
+#roast_times = ["05:31"]
 
 @bot.route("/")
 def home():
@@ -23,8 +22,10 @@ def run_scheduler():
 def tweet_job():
     for post in post_times:
         schedule.every().day.at(post).do(tweet)
+    '''
     for roast in roast_times:
         schedule.every().day.at(roast).do(reply)   
+    '''
 
 if __name__ == "__main__":
     tweet_job()
