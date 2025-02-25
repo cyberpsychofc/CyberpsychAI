@@ -49,12 +49,7 @@ def reply():
             latest_tweet = random.choice(tweets.data)  
             tweet_id = latest_tweet.id  
             tweet_text = latest_tweet.text  
-
-            api.update_status(
-                status=generate_reply_text(username, tweet_text), 
-                in_reply_to_status_id=tweet_id, 
-                auto_populate_reply_metadata=True
-            )
+            newapi.create_tweet(in_reply_to_tweet_id=tweet_id, text=generate_reply_text(username,tweet_text))
 
     except Exception as e:
         print(f"Reply couldn't be posted because: {e}")

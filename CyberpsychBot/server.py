@@ -11,8 +11,8 @@ def home():
     return "CyberpsychAI is running!"
 
 def tweet_job():
-    schedule.every(2).hours.do(tweet)
-    schedule.every(8).hours.do(reply)
+    schedule.every(120).minutes.do(tweet)
+    schedule.every(480).minutes.do(reply)
     while True:
         schedule.run_pending() 
         time.sleep(30)
