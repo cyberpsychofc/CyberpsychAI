@@ -11,11 +11,12 @@ def home():
     return "CyberpsychAI is running!"
 
 def tweet_job():
-    schedule.every(120).minutes.do(tweet)
+    tweet()
+    '''schedule.every(1).minutes.do(tweet)
     schedule.every(480).minutes.do(reply)
     while True:
         schedule.run_pending() 
-        time.sleep(30)
+        time.sleep(30)'''
 
 if __name__ == "__main__":
     task = threading.Thread(target=tweet_job, daemon=True)
