@@ -3,7 +3,7 @@ import threading
 import schedule
 from flask import Flask
 from tweet import tweet, reply
-
+from datetime import datetime
 bot = Flask(__name__)
 
 # Free-tier sends atmost of 17 requests a day, so plan
@@ -26,7 +26,10 @@ def tweet_job():
         schedule.every().day.at(roast).do(reply)   
 
 if __name__ == "__main__":
-    tweet_job()
+    '''tweet_job()
     task = threading.Thread(target=run_scheduler, daemon=True)
-    task.start()
+    task.start()'''
+    local_time = datetime.now()  # Gets local date & time
+    print(local_time)
+
     bot.run(host="0.0.0.0", port=8000)
