@@ -7,8 +7,8 @@ from tweet import tweet, reply
 bot = Flask(__name__)
 
 # Free-tier sends atmost of 17 requests a day, so plan
-post_times = ["10:00"]
-roast_times = ["10:02"]
+post_times = ["20:35"]
+roast_times = ["20:37"]
 
 @bot.route("/")
 def home():
