@@ -1,4 +1,5 @@
 import time
+import requests
 import threading
 import schedule
 from flask import Flask
@@ -7,7 +8,7 @@ from tweet import tweet, reply
 bot = Flask(__name__)
 
 # Free-tier sends atmost of 17 requests a day, so plan
-post_times = ["06:00","08:00","10:00","12:00","14:00","16:00"]  # Instance timezone is UTC
+post_times = ["13:15","15:00","17:00","19:00","21:00","23:00"]  # Instance timezone is UTC
 #roast_times = ["05:31"]
 
 @bot.route("/")
@@ -27,8 +28,18 @@ def tweet_job():
         schedule.every().day.at(roast).do(reply)   
     '''
 
+def keep_scheduler_alive():
+    while True:
+        try:
+            requests.get('http://0.0.0.0:8000/')
+        except requests.exceptions.RequestException as e:
+            print(f"Failed ping: {e}")
+        time.sleep(120) 
+
 if __name__ == "__main__":
     tweet_job()
-    task = threading.Thread(target=run_scheduler, daemon=True)
+    task = threading.Thread(target=run_scheduler)
     task.start()
+    thread_support = threading.Thread(target=keep_scheduler_alive)
+    thread_support.start()
     bot.run(host="0.0.0.0", port=8000)

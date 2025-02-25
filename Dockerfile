@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python", "CyberpsychBot/server.py"]
+CMD ["gunicorn","-b","0.0.0.0:8000","CyberpsychBot.server:bot"]
