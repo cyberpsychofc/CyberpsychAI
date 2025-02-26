@@ -21,6 +21,7 @@ def run_scheduler():
         time.sleep(30)
 
 def tweet_job():
+    schedule.clear()
     for post in post_times:
         schedule.every().day.at(post).do(tweet)
     '''
